@@ -6,7 +6,6 @@ wasm_bindgen_test_configure!(run_in_browser);
 
 #[wasm_bindgen_test]
 fn test_add_task() {
-    // We need to provide a Leptos runtime context for RwSignal to work
     let service = TaskService::new();
     service.add_task("Test Task".to_string());
     
@@ -28,6 +27,17 @@ fn test_toggle_task() {
 }
 
 #[wasm_bindgen_test]
+fn test_toggle_non_existent_task() {
+    let service = TaskService::new();
+    service.add_task("Task 1".to_string());
+    let fake_id = "non-existent".to_string();
+    
+    service.toggle_task(fake_id);
+    assert_eq!(service.tasks.get().len(), 1);
+    assert!(!service.tasks.get()[0].completed);
+}
+
+#[wasm_bindgen_test]
 fn test_remove_task() {
     let service = TaskService::new();
     service.add_task("Task 1".to_string());
@@ -40,8 +50,22 @@ fn test_remove_task() {
 }
 
 #[wasm_bindgen_test]
+fn test_remove_non_existent_task() {
+    let service = TaskService::new();
+    service.add_task("Task 1".to_string());
+    let fake_id = "non-existent".to_string();
+    
+    service.remove_task(fake_id);
+    assert_eq!(service.tasks.get().len(), 1);
+}
+
+#[wasm_bindgen_test]
 fn test_progress_calculation() {
     let service = TaskService::new();
+    
+    // Edge case: Empty list
+    assert_eq!(service.get_progress(), 0.0);
+    
     service.add_task("T1".to_string());
     service.add_task("T2".to_string());
     

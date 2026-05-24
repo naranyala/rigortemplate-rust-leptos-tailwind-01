@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::stdlib::components::modal::Modal;
+use crate::ui::components::modal::Modal;
 
 #[component]
 pub fn ModalDemo() -> impl IntoView {

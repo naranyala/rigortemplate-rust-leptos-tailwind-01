@@ -4,7 +4,7 @@ use gloo_storage::{LocalStorage, Storage};
 use uuid::Uuid;
 use chrono::{DateTime, Utc};
 use crate::error::{self, AppError};
-use crate::services::registry::Service;
+use crate::core::services::registry::Service;
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Task {

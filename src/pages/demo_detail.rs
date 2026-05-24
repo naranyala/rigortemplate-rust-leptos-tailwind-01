@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::stdlib::components::code_block::CodeBlock;
+use crate::ui::components::code_block::CodeBlock;
 
 #[component]
 pub fn DemoDetail(

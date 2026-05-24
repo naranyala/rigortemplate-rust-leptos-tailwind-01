@@ -1,6 +1,6 @@
 use leptos::prelude::*;
-use crate::stdlib::hooks::*;
-use crate::stdlib::components::showcase::Showcase;
+use crate::shared::hooks::*;
+use crate::ui::components::showcase::Showcase;
 
 #[component]
 pub fn Hooks() -> AnyView {

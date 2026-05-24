@@ -21,6 +21,13 @@ The `MainLayout` component provides a flexible wrapper for the application. It s
 - `NoTopNav`: Sidebar and Main content.
 - `Fullscreen`: Main content only.
 
+## The Reactive Cycle
+The application follows a unidirectional data flow:
+1. **Service**: Manages raw data and business logic (e.g., `TaskService`). Uses `RwSignal` for state.
+2. **Store**: Holds the `ServiceRegistry` and global UI state. Provided as context.
+3. **Hooks**: Encapsulate logic for specific browser or state behaviors, often interacting with services or the store.
+4. **Component**: Consumes signals from hooks or services and renders the view.
+
 ## Directory Structure
 - `src/app.rs`: Root component and layout orchestration.
 - `src/store.rs`: Global state and store initialization.

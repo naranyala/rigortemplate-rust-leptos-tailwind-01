@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::stdlib::components::tabs::{Tabs, TabItem};
+use crate::ui::components::tabs::{Tabs, TabItem};
 
 #[component]
 pub fn TabsDemo() -> impl IntoView {

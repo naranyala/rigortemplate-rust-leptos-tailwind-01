@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::stdlib::components::stats_card::{StatsCard, Trend};
+use crate::ui::components::stats_card::{StatsCard, Trend};
 
 #[component]
 pub fn StatsDemo() -> impl IntoView {

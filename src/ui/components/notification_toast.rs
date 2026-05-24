@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::store::{use_store, NotificationLevel};
+use crate::core::store::{use_store, NotificationLevel};
 
 #[component]
 pub fn NotificationToast() -> impl IntoView {

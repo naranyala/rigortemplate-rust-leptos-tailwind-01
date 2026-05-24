@@ -54,6 +54,8 @@ Detailed guides are available in the `docs/` directory:
 - [Architecture](docs/Architecture.md): System design, GlobalStore, and Service Registry.
 - [Hooks](docs/Hooks.md): Comprehensive list of available reactive hooks.
 - [Components](docs/Components.md): Documentation of the UI component library.
+- [State Management](docs/StateManagement.md): In-depth look at the DI pattern and store.
+- [Routing](docs/Routing.md): How the page and layout system works.
 - [Development](docs/Development.md): Guide for extending the template.
 
 ## Features

@@ -1,6 +1,6 @@
 use leptos::prelude::*;
-use crate::services::task_service::TaskService;
-use crate::services::registry::ServiceRegistry;
+use crate::core::services::task_service::TaskService;
+use crate::core::services::registry::ServiceRegistry;
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 pub enum Page {
@@ -24,7 +24,7 @@ pub enum Theme {
     Dark,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub struct Notification {
     pub id: uuid::Uuid,
     pub message: String,

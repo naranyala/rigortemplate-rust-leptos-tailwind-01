@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use wasm_bindgen::JsCast;
 use wasm_bindgen::JsValue;
-use crate::stdlib::hooks::StoredNode;
+use crate::shared::hooks::StoredNode;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ElementSize {

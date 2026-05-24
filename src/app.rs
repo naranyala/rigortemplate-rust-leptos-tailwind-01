@@ -1,15 +1,11 @@
 use leptos::prelude::*;
 use leptos_meta::*;
-use crate::components::layout::{MainLayout, LayoutType};
-use crate::pages::{home::Home, demo::Demo, demo_detail::DemoDetail, hooks::Hooks};
-use crate::demos::accordion::{AccordionDemo, SOURCE as ACCORDION_SRC};
-use crate::demos::sliding_panel::{SlidingPanelDemo, SOURCE as PANEL_SRC};
-use crate::demos::stats::{StatsDemo, SOURCE as STATS_SRC};
-use crate::demos::tabs::{TabsDemo, SOURCE as TABS_SRC};
-use crate::demos::modal::{ModalDemo, SOURCE as MODAL_SRC};
-use crate::store::{GlobalStore, Page};
-use crate::stdlib::components::notification_toast::NotificationToast;
+use crate::ui::layout::{MainLayout, LayoutType};
+use crate::pages::{home::Home, demo::Demo, demo_detail::DemoDetail, hooks::Hooks, demos::{accordion::AccordionDemo, accordion::SOURCE as ACCORDION_SRC, sliding_panel::SlidingPanelDemo, sliding_panel::SOURCE as PANEL_SRC, stats::StatsDemo, stats::SOURCE as STATS_SRC, tabs::TabsDemo, tabs::SOURCE as TABS_SRC, modal::ModalDemo, modal::SOURCE as MODAL_SRC}};
+use crate::core::store::{GlobalStore, Page};
+use crate::ui::components::notification_toast::NotificationToast;
 use crate::error;
+
 
 #[component]
 pub fn App() -> AnyView {

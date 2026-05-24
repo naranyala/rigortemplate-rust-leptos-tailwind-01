@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use web_sys::{window, Node, MouseEvent};
 use wasm_bindgen::JsCast;
-use crate::stdlib::hooks::StoredNode;
+use crate::shared::hooks::StoredNode;
 
 pub fn use_click_outside<F>(target: StoredNode<leptos::html::Div>, callback: F)
 where

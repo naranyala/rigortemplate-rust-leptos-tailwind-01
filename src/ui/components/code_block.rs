@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::stdlib::utils::syntax_highlight::highlight_rust;
+use crate::shared::utils::syntax_highlight::highlight_rust;
 
 pub const SOURCE: &str = include_str!("code_block.rs");
 

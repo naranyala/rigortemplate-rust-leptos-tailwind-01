@@ -1,7 +1,12 @@
 use leptos::prelude::*;
-use crate::demos::accordion::{AccordionDemo, SOURCE as ACCORDION_SRC};
-use crate::demos::sliding_panel::{SlidingPanelDemo, SOURCE as PANEL_SRC};
-use crate::stdlib::components::{
+use crate::pages::demos::{
+    accordion::{AccordionDemo, SOURCE as ACCORDION_SRC},
+    sliding_panel::{SlidingPanelDemo, SOURCE as PANEL_SRC},
+    stats::{StatsDemo, SOURCE as STATS_SRC},
+    tabs::{TabsDemo, SOURCE as TABS_SRC},
+    modal::{ModalDemo, SOURCE as MODAL_SRC},
+};
+use crate::ui::components::{
     button::{BaseButton, ButtonVariant, SOURCE as BUTTON_SRC},
     input::{BaseInput, SOURCE as INPUT_SRC},
     card::{BaseCard, SOURCE as CARD_SRC},
@@ -10,11 +15,13 @@ use crate::stdlib::components::{
     error_display::ErrorMessage,
     showcase::Showcase,
 };
-use crate::services::task_service::TaskService;
+use crate::core::services::task_service::TaskService;
+use crate::core::store::GlobalStore;
+
 
 #[component]
 pub fn Demo() -> AnyView {
-    let store = match use_context::<crate::store::GlobalStore>() {
+    let store = match use_context::<GlobalStore>() {
         Some(s) => s,
         None => {
             crate::error::log_error(&crate::error::AppError::Context(
@@ -235,10 +242,10 @@ pub fn Demo() -> AnyView {
                     <p class="text-slate-400 mt-1">"The CodeBlock and Showcase components used to build this library page."</p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <Showcase label="CodeBlock" source=crate::stdlib::components::code_block::SOURCE>
+                    <Showcase label="CodeBlock" source=crate::ui::components::code_block::SOURCE>
                         <p class="text-sm text-slate-400">"A dark-theme code viewer with window controls header and monospace rendering — used to display component source files inline."</p>
                     </Showcase>
-                    <Showcase label="Showcase" source=crate::stdlib::components::showcase::SOURCE>
+                    <Showcase label="Showcase" source=crate::ui::components::showcase::SOURCE>
                         <p class="text-sm text-slate-400">"Wrapper that renders a component preview alongside its labeled header and source code below."</p>
                     </Showcase>
                 </div>

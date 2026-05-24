@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::store::{GlobalStore, Page};
+use crate::core::store::{GlobalStore, Page};
 
 fn nav(
     current_page: RwSignal<Page>,

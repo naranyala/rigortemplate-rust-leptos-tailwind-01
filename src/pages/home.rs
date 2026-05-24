@@ -1,23 +1,10 @@
 use leptos::prelude::*;
-use crate::stdlib::components::{button::{BaseButton, ButtonVariant}, card::BaseCard, error_display::ErrorMessage};
-use crate::store::{GlobalStore, Page};
-use crate::services::task_service::TaskService;
+use crate::ui::components::{button::{BaseButton, ButtonVariant}, card::BaseCard, error_display::ErrorMessage};
+use crate::core::store::{GlobalStore, Page};
+use crate::core::services::task_service::TaskService;
+use crate::shared::utils::date::format_time_ago;
 
-fn time_ago(dt: &chrono::DateTime<chrono::Utc>) -> String {
-    let now = chrono::Utc::now();
-    let dur = now.signed_duration_since(*dt);
-    if dur.num_minutes() < 1 {
-        "just now".to_string()
-    } else if dur.num_minutes() < 60 {
-        format!("{}m ago", dur.num_minutes())
-    } else if dur.num_hours() < 24 {
-        format!("{}h ago", dur.num_hours())
-    } else {
-        format!("{}d ago", dur.num_days())
-    }
-}
-
-fn completion_rate(tasks: &[crate::services::task_service::Task]) -> f64 {
+fn completion_rate(tasks: &[crate::core::services::task_service::Task]) -> f64 {
     let total = tasks.len();
     if total == 0 {
         0.0
@@ -174,7 +161,7 @@ pub fn Home() -> AnyView {
                                                         >
                                                             {task.text}
                                                         </p>
-                                                        <p class="text-xs text-slate-500 mt-0.5">{time_ago(&task.created_at)}</p>
+                                                        <p class="text-xs text-slate-500 mt-0.5">{format_time_ago(task.created_at)}</p>
                                                     </div>
                                                     <div class="opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                                                         <input
@@ -223,7 +210,7 @@ pub fn Home() -> AnyView {
                             </button>
                         </div>
                     </BaseCard>
-
+                    
                     <div class="bg-slate-800/80 border border-slate-700/50 rounded-2xl p-6 shadow-sm space-y-4">
                         <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500">"Task Breakdown"</h3>
                         {move || {
@@ -271,3 +258,4 @@ pub fn Home() -> AnyView {
         </div>
     }.into_any()
 }
+

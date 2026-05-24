@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::store::{GlobalStore, Page};
+use crate::core::store::{GlobalStore, Page};
 
 #[component]
 pub fn TopNav() -> AnyView {

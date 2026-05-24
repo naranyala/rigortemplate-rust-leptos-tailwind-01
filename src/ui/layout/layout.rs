@@ -1,5 +1,6 @@
 use leptos::prelude::*;
-use crate::components::{sidebar::Sidebar, topnav::TopNav};
+use crate::ui::layout::{sidebar::Sidebar, topnav::TopNav};
+use crate::core::store::GlobalStore;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum LayoutType {
@@ -14,11 +15,12 @@ pub fn MainLayout(
     #[prop(into)] layout_type: LayoutType,
     children: Children,
 ) -> impl IntoView {
-    let theme = use_context::<crate::store::GlobalStore>().expect("GlobalStore not provided").theme;
+    let store = use_context::<GlobalStore>().expect("GlobalStore not provided");
+    let theme = store.theme;
 
     view! {
         <div class=move || format!("flex h-screen text-slate-100 transition-colors duration-300 {}", 
-            if theme.get() == crate::store::Theme::Dark { "bg-slate-900" } else { "bg-slate-100 text-slate-900" }
+            if theme.get() == crate::core::store::Theme::Dark { "bg-slate-900" } else { "bg-slate-100 text-slate-900" }
         )>
             {move || match layout_type {
                 LayoutType::Default | LayoutType::NoTopNav => view! { <Sidebar /> }.into_any(),

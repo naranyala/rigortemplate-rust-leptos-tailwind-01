@@ -1,9 +1,16 @@
 {
+  "scripts": {
+    "tailwind:build": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css",
+    "tailwind:watch": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css --watch",
+    "dev": "PORT=$(./scripts/find-port.sh) && bun concurrently \"bun run tailwind:watch\" \"trunk serve --port $PORT\"",
+    "build": "bun run tailwind:build && trunk build --release"
+  },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.0",
-    "@tailwindcss/typography": "^0.5.19",
-    "postcss": "^8.5.15",
+    "concurrently": "^8.2.2",
     "tailwindcss": "^4.3.0"
   },
-  "scripts": {}
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0"
+  }
 }
+
