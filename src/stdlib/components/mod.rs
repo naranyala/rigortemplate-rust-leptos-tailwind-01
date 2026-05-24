@@ -4,4 +4,8 @@ pub mod card;
 pub mod code_block;
 pub mod error_display;
 pub mod input;
+pub mod modal;
+pub mod notification_toast;
+pub mod stats_card;
+pub mod tabs;
 pub mod showcase;

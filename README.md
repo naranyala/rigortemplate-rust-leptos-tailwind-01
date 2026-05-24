@@ -7,7 +7,7 @@
 
 A high-performance, modern dashboard template built with **Leptos (CSR mode)**, **Trunk**, and **Tailwind CSS**. This template provides a robust foundation for building single-page applications (SPAs) with Rust and WebAssembly.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -28,7 +28,7 @@ chmod +x run.sh
 
 The script will automatically detect an available port (starting at 8080) and serve the application.
 
-## 🛠 Project Architecture
+## Project Architecture
 
 ### Core Stack
 - **Frontend**: [Leptos 0.8](https://leptos.dev/) (Client-Side Rendering)
@@ -37,16 +37,26 @@ The script will automatically detect an available port (starting at 8080) and se
 - **State Management**: Leptos Signals & Context API
 
 ### Directory Structure
-- `src/app.rs`: Root application component and routing logic.
+- `src/app.rs`: Root application component and layout orchestration.
+- `src/store.rs`: Global state and service registry.
 - `src/pages/`: Main views (Home, Demo, Hooks).
-- `src/components/`: Shared UI components (Sidebar, TopNav).
+- `src/components/`: Shared UI components (Sidebar, TopNav, Layout).
 - `src/stdlib/`: The "Standard Library" of the project:
     - `components/`: Atomic UI components (Buttons, Inputs, Cards).
     - `hooks/`: Reusable reactive primitives (use_window_size, use_local_storage, etc.).
     - `utils/`: General utility functions and syntax highlighting.
+- `src/services/`: Global business logic services.
 - `src/demos/`: Source code for the interactive demos.
 
-## 📚 Features
+## Documentation
+
+Detailed guides are available in the `docs/` directory:
+- [Architecture](docs/Architecture.md): System design, GlobalStore, and Service Registry.
+- [Hooks](docs/Hooks.md): Comprehensive list of available reactive hooks.
+- [Components](docs/Components.md): Documentation of the UI component library.
+- [Development](docs/Development.md): Guide for extending the template.
+
+## Features
 
 ### Hooks Library
 A rich collection of reusable hooks for common browser and state patterns:
@@ -59,7 +69,7 @@ An interactive library where each component is displayed with:
 - A live, interactive preview.
 - A syntax-highlighted source code block.
 
-## 🧪 Testing
+## Testing
 
 ### Unit & Logic Tests
 Run standard Rust tests for utilities and services:
@@ -73,7 +83,7 @@ Run tests that require a browser environment (e.g., hooks, storage):
 wasm-pack test --chrome --headless
 ```
 
-## 📦 Production Build
+## Production Build
 
 To compile the project for production:
 ```bash

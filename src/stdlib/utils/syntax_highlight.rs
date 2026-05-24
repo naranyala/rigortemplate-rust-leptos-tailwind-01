@@ -259,7 +259,7 @@ mod tests {
 
     #[test]
     fn test_highlight_raw_strings() {
-        let code = r#"let s = r#"raw string"#";"#;
+        let code = "let s = r#\"raw string\"#;";
         let result = highlight_rust(code);
         assert!(result.contains("hl-string"));
     }

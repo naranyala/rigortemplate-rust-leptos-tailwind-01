@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use web_sys::{window, Node, MouseEvent};
 use wasm_bindgen::JsCast;
+use crate::stdlib::hooks::StoredNode;
 
 pub fn use_click_outside<F>(target: StoredNode<leptos::html::Div>, callback: F)
 where
@@ -15,12 +16,14 @@ where
         let path = ev.composed_path();
         let mut contains = false;
         
-        for node in path.iter() {
-            if node.unchecked_into::<Node>().as_ref() == target_element.as_ref() {
-                contains = true;
-                break;
+            for node in path.iter() {
+                let node_as_node = node.unchecked_into::<Node>();
+                if AsRef::<Node>::as_ref(&node_as_node) == AsRef::<Node>::as_ref(&target_element) {
+                    contains = true;
+                    break;
+                }
             }
-        }
+
         
         if !contains {
             (callback.borrow_mut())();

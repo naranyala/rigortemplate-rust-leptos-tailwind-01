@@ -13,6 +13,7 @@ pub fn TopNav() -> AnyView {
         Page::Accordion => "Accordion Demo",
         Page::SlidingPanel => "Sliding Panel Demo",
         Page::Hooks => "Hooks Library",
+        _ => "Project",
     };
 
     view! {

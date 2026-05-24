@@ -16,11 +16,12 @@ pub fn use_toggle(initial: bool) -> (ReadSignal<bool>, impl Fn()) {
 /// Returns a tuple containing the current count and a set of control functions.
 pub fn use_counter<T>(initial: T) -> (ReadSignal<T>, impl Fn(), impl Fn(), impl Fn(T))
 where
-    T: std::ops::AddAssign + std::ops::SubAssign + Copy + 'static,
+    T: std::ops::AddAssign + std::ops::SubAssign + Copy + Send + Sync + 'static,
 {
-    let (count, set_count) = signal(initial);
+    let (count, _set_count) = signal(initial);
+    
+    let _increment = move || {
 
-    let increment = move || {
         // This is a simplification. In a real implementation, we'd need a way to know 
         // what "1" is for type T. We'll assume T is a numeric type.
         // For this utility, we'll implement it for i32 by default or require a step.
@@ -37,7 +38,7 @@ where
 /// A more flexible counter hook that allows defining the step.
 pub fn use_counter_with_step<T>(initial: T, step: T) -> (ReadSignal<T>, impl Fn(), impl Fn(), impl Fn(T))
 where
-    T: std::ops::AddAssign + std::ops::SubAssign + Copy + 'static,
+    T: std::ops::AddAssign + std::ops::SubAssign + Copy + Send + Sync + 'static,
 {
     let (count, set_count) = signal(initial);
 

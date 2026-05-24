@@ -1,7 +1,6 @@
 use leptos::prelude::*;
 use crate::stdlib::hooks::*;
 use crate::stdlib::components::showcase::Showcase;
-use crate::stdlib::components::code_block::CodeBlock;
 
 #[component]
 pub fn Hooks() -> AnyView {
@@ -23,7 +22,7 @@ pub fn Hooks() -> AnyView {
                                     <button 
                                         class=move || format!("px-4 py-2 rounded-lg text-sm font-medium transition-colors {}", 
                                             if val.get() { "bg-indigo-500 text-white" } else { "bg-slate-700 text-slate-300" })
-                                        on:click=toggle
+                                        on:click=move |_| toggle()
                                     >
                                         {move || if val.get() { "ON" } else { "OFF" }}
                                     </button>
@@ -37,9 +36,9 @@ pub fn Hooks() -> AnyView {
                             let (count, inc, dec, _) = use_counter_with_step(0, 1);
                             view! {
                                 <div class="flex items-center gap-3">
-                                    <button class="px-3 py-1 bg-slate-700 rounded" on:click=dec>"-"</button>
+                                    <button class="px-3 py-1 bg-slate-700 rounded" on:click=move |_| dec()>"-"</button>
                                     <span class="font-mono text-lg w-12 text-center">{move || count.get()}</span>
-                                    <button class="px-3 py-1 bg-slate-700 rounded" on:click=inc>"+"</button>
+                                     <button class="px-3 py-1 bg-slate-700 rounded" on:click=move |_| inc()>"+"</button>
                                 </div>
                             }.into_any()
                         }}
@@ -104,7 +103,7 @@ pub fn Hooks() -> AnyView {
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <Showcase label="use_click_outside" source="pub fn use_click_outside<F>(target: StoredNode<Div>, callback: F) { ... }">
                         {move || {
-                            let div_ref = create_node_ref::<leptos::html::Div>();
+                            let div_ref = NodeRef::<leptos::html::Div>::new();
                             let (clicked_out, set_clicked_out) = signal(false);
                             
                             use_click_outside(div_ref, move || set_clicked_out.set(true));

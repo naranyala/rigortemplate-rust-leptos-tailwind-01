@@ -12,10 +12,10 @@ pub fn use_mouse_position() -> ReadSignal<MousePosition> {
     let win = window().expect("window not available");
     
     let initial_pos = MousePosition { x: 0, y: 0 };
-    let pos = signal(initial_pos);
+    let (read_pos, write_pos) = signal(initial_pos);
 
     let handle_mousemove = move |ev: MouseEvent| {
-        pos.set(MousePosition {
+        write_pos.set(MousePosition {
             x: ev.client_x(),
             y: ev.client_y(),
         });
@@ -28,5 +28,5 @@ pub fn use_mouse_position() -> ReadSignal<MousePosition> {
 
     closure.forget();
 
-    pos
+    read_pos
 }

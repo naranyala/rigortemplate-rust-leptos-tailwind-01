@@ -1,6 +1,6 @@
-use leptos::prelude::*;
 use web_sys::{window, KeyboardEvent};
 use wasm_bindgen::JsCast;
+
 
 pub struct Shortcut {
     pub key: String,

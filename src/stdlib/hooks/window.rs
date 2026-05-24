@@ -12,17 +12,17 @@ pub fn use_window_size() -> ReadSignal<WindowSize> {
     let win = window().expect("window not available");
     
     let initial_size = WindowSize {
-        width: win.inner_width().unwrap_or(0).unwrap_or(0) as u32,
-        height: win.inner_height().unwrap_or(0).unwrap_or(0) as u32,
+        width: win.inner_width().ok().and_then(|v| v.as_f64()).unwrap_or(0.0) as u32,
+        height: win.inner_height().ok().and_then(|v| v.as_f64()).unwrap_or(0.0) as u32,
     };
 
-    let size = signal(initial_size);
+    let (read_size, write_size) = signal(initial_size);
 
     let handle_resize = move |_: Event| {
         if let Some(win) = window() {
-            size.set(WindowSize {
-                width: win.inner_width().unwrap_or(0).unwrap_or(0) as u32,
-                height: win.inner_height().unwrap_or(0).unwrap_or(0) as u32,
+            write_size.set(WindowSize {
+                width: win.inner_width().ok().and_then(|v| v.as_f64()).unwrap_or(0.0) as u32,
+                height: win.inner_height().ok().and_then(|v| v.as_f64()).unwrap_or(0.0) as u32,
             });
         }
     };
@@ -34,5 +34,5 @@ pub fn use_window_size() -> ReadSignal<WindowSize> {
 
     closure.forget();
 
-    size
+    read_size
 }

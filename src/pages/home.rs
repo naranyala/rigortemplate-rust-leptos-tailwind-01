@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use crate::stdlib::components::{button::{BaseButton, ButtonVariant}, card::BaseCard, error_display::ErrorMessage};
 use crate::store::{GlobalStore, Page};
+use crate::services::task_service::TaskService;
 
 fn time_ago(dt: &chrono::DateTime<chrono::Utc>) -> String {
     let now = chrono::Utc::now();
@@ -45,7 +46,7 @@ pub fn Home() -> AnyView {
         }
     };
 
-    let ts = store.task_service.clone();
+    let ts = store.services.get::<TaskService>().expect("TaskService not registered");
     let page = store.current_page;
 
     let total = {

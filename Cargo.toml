@@ -18,7 +18,7 @@ http = "1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 gloo-storage = "0.3"
-web-sys = { version = "0.3", features = ["Window", "Event", "MouseEvent", "KeyboardEvent", "MediaQueryList", "MediaQueryListEvent", "Node", "Element", "Navigator", "Location", "UrlSearchParams", "ResizeObserver", "ResizeObserverEntry", "IntersectionObserver", "IntersectionObserverEntry", "IntersectionObserverInit"] }
+web-sys = { version = "0.3", features = ["Window", "Event", "MouseEvent", "KeyboardEvent", "MediaQueryList", "MediaQueryListEvent", "Node", "Element", "Navigator", "Location", "UrlSearchParams", "ResizeObserver", "ResizeObserverEntry", "IntersectionObserver", "IntersectionObserverEntry", "IntersectionObserverInit", "DomRect"] }
 js-sys = "0.3"
 chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1.0", features = ["v4", "serde", "js"] }

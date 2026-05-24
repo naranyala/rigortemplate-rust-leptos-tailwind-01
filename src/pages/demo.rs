@@ -10,6 +10,7 @@ use crate::stdlib::components::{
     error_display::ErrorMessage,
     showcase::Showcase,
 };
+use crate::services::task_service::TaskService;
 
 #[component]
 pub fn Demo() -> AnyView {
@@ -29,7 +30,7 @@ pub fn Demo() -> AnyView {
             }.into_any();
         }
     };
-    let task_service = store.task_service.clone();
+    let task_service = store.services.get::<TaskService>().expect("TaskService not registered");
     let (input, set_input) = signal(String::new());
 
     let ts = task_service.clone();
