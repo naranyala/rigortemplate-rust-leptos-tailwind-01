@@ -1,0 +1,39 @@
+# --- Rust & Cargo ---
+/target/
+**/target/
+pkg/
+**.rs.bk
+
+# --- Trunk & WASM ---
+/dist/
+.trunk/
+
+# --- Node.js & JS Tooling ---
+node_modules/
+.npm/
+.pnpm-store/
+bun.lockb
+package-lock.json
+pnpm-lock.yaml
+.eslintcache
+.stylelintcache
+
+# --- Environment & Secrets ---
+.env
+.env.*
+!.env.example
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Testing & Coverage ---
+test-results/
+end2end/playwright-report/
+playwright/.cache/
+coverage/
+.nyc_output/

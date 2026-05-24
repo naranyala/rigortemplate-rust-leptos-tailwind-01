@@ -1,0 +1,8 @@
+[build]
+# Features passed to `cargo build`
+features = ["csr"]
+# Rust compilation target is auto-detected by Trunk (defaults to wasm32-unknown-unknown)
+
+[serve]
+port = 8080
+open = true

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@utility animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+}
+
+.hl-keyword  { color: #ff79c6; }
+.hl-type     { color: #8be9fd; }
+.hl-string   { color: #f1fa8c; }
+.hl-comment  { color: #6272a4; font-style: italic; }
+.hl-number   { color: #bd93f9; }
+.hl-macro    { color: #50fa7b; }
+.hl-attribute { color: #ffb86c; }
+.hl-lifetime { color: #ff5555; }
+.hl-ctor     { color: #8be9fd; }
