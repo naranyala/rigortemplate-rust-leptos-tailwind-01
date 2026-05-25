@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 use crate::core::store::{GlobalStore, Page};
+use crate::core::nav::{NavItem, COMPONENTS_ITEMS, HOOKS_ITEMS};
 use crate::core::utils::cn;
 use fuzzy_matcher::FuzzyMatcher;
 use fuzzy_matcher::skim::SkimMatcherV2;
@@ -9,12 +10,6 @@ fn matches(query: &str, label: &str, matcher: &SkimMatcherV2) -> bool {
         return true;
     }
     matcher.fuzzy_match(label, query).is_some()
-}
-
-#[derive(Clone)]
-struct NavItem {
-    page: Page,
-    label: &'static str,
 }
 
 fn nav_section(
@@ -67,29 +62,15 @@ fn nav(
     open_store: RwSignal<bool>,
     search_query: RwSignal<String>,
 ) -> AnyView {
-    let components_items = vec![
-        NavItem { page: Page::Accordion, label: "Accordion" },
-        NavItem { page: Page::SlidingPanel, label: "Sliding Panel" },
-        NavItem { page: Page::Tabs, label: "Tabs" },
-        NavItem { page: Page::Modal, label: "Modal" },
-        NavItem { page: Page::Stats, label: "Stats" },
-        NavItem { page: Page::Badge, label: "Badge" },
-        NavItem { page: Page::Button, label: "Button" },
-        NavItem { page: Page::Card, label: "Card" },
-        NavItem { page: Page::Input, label: "Input" },
-        NavItem { page: Page::NotificationToast, label: "Toast" },
-    ];
-
-    let hooks_items = vec![
-        NavItem { page: Page::HookToggle, label: "Toggle" },
-        NavItem { page: Page::HookCounter, label: "Counter" },
-        NavItem { page: Page::HookWindowSize, label: "Window Size" },
-        NavItem { page: Page::HookMousePosition, label: "Mouse Pos" },
-        NavItem { page: Page::HookMediaQuery, label: "Media Query" },
-        NavItem { page: Page::HookOnlineStatus, label: "Online Status" },
-        NavItem { page: Page::HookClickOutside, label: "Click Outside" },
-        NavItem { page: Page::HookKeyboardShortcut, label: "Keyboard" },
-    ];
+    let nav = move || {
+        let q = search_query.get();
+        view! {
+            <>
+                {nav_section("Components", &COMPONENTS_ITEMS, current_page, open_store, &q)}
+                {nav_section("Hooks", &HOOKS_ITEMS, current_page, open_store, &q)}
+            </>
+        }.into_any()
+    };
 
     view! {
         <div class="layout-sidebar flex flex-col h-full w-64 bg-surface shadow-lg shadow-black/[0.04]">
@@ -113,8 +94,8 @@ fn nav(
                     let q = search_query.get();
                     view! {
                         <>
-                            {nav_section("Components", &components_items, current_page, open_store, &q)}
-                            {nav_section("Hooks", &hooks_items, current_page, open_store, &q)}
+                            {nav_section("Components", COMPONENTS_ITEMS, current_page, open_store, &q)}
+                            {nav_section("Hooks", HOOKS_ITEMS, current_page, open_store, &q)}
                         </>
                     }.into_any()
                 }}

@@ -17,6 +17,8 @@ pub fn MainLayout(
 ) -> impl IntoView {
     let store = use_context::<GlobalStore>().expect("GlobalStore not provided");
     let theme = store.theme;
+    let current_page = store.current_page;
+    let main_ref = NodeRef::<leptos::html::Main>::new();
 
     Effect::new(move |_| {
         let is_dark = Theme::Dark == theme.get();
@@ -38,6 +40,13 @@ pub fn MainLayout(
         }
     });
 
+    Effect::new(move |_| {
+        let _ = current_page.get();
+        if let Some(main_el) = main_ref.get() {
+            main_el.set_scroll_top(0);
+        }
+    });
+
     view! {
         <div class="flex h-screen transition-colors duration-300 bg-surface text-body">
             {move || match layout_type {
@@ -50,7 +59,10 @@ pub fn MainLayout(
                     LayoutType::Default | LayoutType::NoSidebar => view! { <TopNav /> }.into_any(),
                     _ => view! { <div /> }.into_any(),
                 }}
-                <main class="flex-1 overflow-y-auto">
+                <main 
+                    node_ref=main_ref 
+                    class="flex-1 overflow-y-auto"
+                >
                     {children()}
                 </main>
             </div>

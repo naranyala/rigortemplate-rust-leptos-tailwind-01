@@ -183,14 +183,14 @@ fn highlight_line(line: &str) -> String {
             let mut word = String::new();
             word.push(c);
             while let Some((_, ch)) = chars.peek() {
-                if ch.is_alphanumeric() || *ch == '_' {
+                if ch.is_alphanumeric() || *ch == '_' || *ch == '!' {
                     word.push(*ch);
                     chars.next();
                 } else {
                     break;
                 }
             }
-
+            
             if is_keyword(&word) {
                 let _ = write!(out, "<span class=\"hl-keyword\">{}</span>", word);
             } else if is_type(&word) {
@@ -204,6 +204,7 @@ fn highlight_line(line: &str) -> String {
             }
             continue;
         }
+
 
         if c == '!' && chars.peek().map(|(_, ch)| ch.is_alphabetic()) == Some(true) {
             let mut macro_name = String::new();

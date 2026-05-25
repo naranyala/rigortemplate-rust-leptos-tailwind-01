@@ -1,31 +1,70 @@
 use leptos::prelude::*;
 use crate::core::store::GlobalStore;
+use crate::core::nav::{COMPONENTS_ITEMS, HOOKS_ITEMS};
 
 #[component]
 pub fn Home() -> AnyView {
-    let _store = match use_context::<GlobalStore>() {
-        Some(s) => s,
-        None => {
-            return view! {
-                <div class="p-6 md:p-10 max-w-7xl mx-auto">
-                    <div class="p-4 rounded-xl bg-red-50 border border-red-200 dark:bg-red-900/30 dark:border-red-800">
-                        <p class="text-sm font-medium text-red-700 dark:text-red-400">"Error"</p>
-                        <p class="text-xs text-red-600 dark:text-red-300 mt-1">"Application state missing."</p>
-                    </div>
-                </div>
-            }.into_any();
-        }
-    };
+    let component_count = COMPONENTS_ITEMS.len();
+    let hook_count = HOOKS_ITEMS.len();
+    let total_demos = Memo::new(move |_| component_count + hook_count);
 
     view! {
-        <div class="flex items-center justify-center h-[calc(100vh-3.5rem)] p-6">
-            <div class="text-center space-y-2">
-                <h1 class="text-4xl font-black tracking-tight text-heading">
-                    "Welcome to RigorTemplate"
-                </h1>
-                <p class="text-sm text-label">
-                    "A Leptos CSR dashboard with Tailwind CSS theming."
-                </p>
+        <div class="p-6">
+            <h1 class="text-3xl font-bold text-heading mb-6">
+                "Welcome to RigorTemplate"
+            </h1>
+            <p class="text-sm text-label mb-8">
+                "A Leptos CSR dashboard with Tailwind CSS theming."
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-surface dark:bg-surface/50 border border-border rounded-xl p-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
+                            "🧩"
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-medium text-heading">"Components Demo"</h2>
+                            <p class="text-sm text-label">"Interactive component showcases"</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-accent">
+                        {component_count}
+                    </div>
+                    <p class="text-xs text-label mt-2">"Total component demonstrations"</p>
+                </div>
+                
+                <div class="bg-surface dark:bg-surface/50 border border-border rounded-xl p-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
+                            "⚡"
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-medium text-heading">"Hooks Demo"</h2>
+                            <p class="text-sm text-label">"Reusable logic demonstrations"</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-accent">
+                        {hook_count}
+                    </div>
+                    <p class="text-xs text-label mt-2">"Total hook demonstrations"</p>
+                </div>
+
+                <div class="bg-surface dark:bg-surface/50 border border-border rounded-xl p-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
+                            "📊"
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-medium text-heading">"Total Demos"</h2>
+                            <p class="text-sm text-label">"Combined component and hook demonstrations"</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-accent">
+                        {total_demos}
+                    </div>
+                    <p class="text-xs text-label mt-2">"Overall demonstration count"</p>
+                </div>
             </div>
         </div>
     }.into_any()

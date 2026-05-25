@@ -1,6 +1,7 @@
 use wasm_bindgen_test::*;
 use leptos::prelude::*;
 use leptos_template::shared::hooks::*;
+use gloo_storage::{LocalStorage, SessionStorage, Storage};
 
 wasm_bindgen_test_configure!(run_in_browser);
 
@@ -39,18 +40,42 @@ fn test_use_counter_with_step() {
 }
 
 #[wasm_bindgen_test]
-fn test_use_local_storage() {
-    let key = "test_storage_key".to_string();
-    let (val, set_val) = use_local_storage(key.clone());
+fn test_use_local_storage_persistence() {
+    let key = "test_storage_persist".to_string();
     
-    set_val.set(100);
-    assert_eq!(val.get(), 100);
+    // Manually set value in LocalStorage
+    LocalStorage::set::<i32>(&key, 200).expect("Failed to set local storage");
+    
+    let (val, _set_val) = use_local_storage::<i32>(key);
+    assert_eq!(val.get(), 200);
+}
+
+#[wasm_bindgen_test]
+fn test_use_session_storage_persistence() {
+    let key = "test_session_persist".to_string();
+    
+    // Manually set value in SessionStorage
+    SessionStorage::set::<i32>(&key, 300).expect("Failed to set session storage");
+    
+    let (val, _set_val) = use_session_storage::<i32>(key);
+    assert_eq!(val.get(), 300);
 }
 
 #[wasm_bindgen_test]
 fn test_use_url_params() {
-    // This test depends on the browser URL. 
-    // In a real test environment, we might use a mock or set the window location.
     let (params, _set_params) = use_url_params();
     assert!(params.get().is_empty() || !params.get().is_empty());
+}
+
+#[wasm_bindgen_test]
+fn test_use_online_status() {
+    let online = use_online_status();
+    // We just verify it returns a value
+    let _ = online.get();
+}
+
+#[wasm_bindgen_test]
+fn test_use_dark_mode() {
+    let dark_mode = use_dark_mode();
+    let _ = dark_mode.get();
 }

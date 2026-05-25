@@ -44,3 +44,4 @@ lib-profile-release = "wasm-release"
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
 web-sys = { version = "0.3", features = ["Window", "Document", "Element", "HtmlElement"] }
+leptos_router = { version = "0.8" }
