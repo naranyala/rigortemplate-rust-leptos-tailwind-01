@@ -8,6 +8,7 @@ pub fn TopNav() -> AnyView {
     let current_page = store.current_page;
 
     let toggle_sidebar = move |_| store.sidebar_open.update(|v| *v = !*v);
+    let go_home = move |_| current_page.set(Page::Home);
     let toggle_theme = move |_| {
         theme.update(|t| {
             *t = match t {
@@ -27,21 +28,21 @@ pub fn TopNav() -> AnyView {
     };
 
     view! {
-        <div class="flex items-center justify-between h-14 px-5 border-b sticky top-0 z-20 transition-colors duration-300 dark:bg-slate-900 dark:border-slate-800 bg-white border-slate-200">
+        <div class="layout-topnav flex items-center justify-between h-14 px-5 sticky top-0 z-20 bg-surface shadow-sm shadow-black/[0.03]">
             <div class="flex items-center gap-3">
-                <button on:click=toggle_sidebar class="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-colors -ml-1 text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800">
+                <button on:click=toggle_sidebar class="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg cursor-pointer transition-colors -ml-1 text-label hover:text-heading hover:bg-muted">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
-                <div class="flex items-center gap-2 text-sm font-medium text-slate-500">
+                <div on:click=go_home class="flex items-center gap-2 text-sm font-medium text-label cursor-pointer">
                     <span>"Workspace"</span>
-                    <span class="text-slate-400 dark:text-slate-600">"/"</span>
-                    <span class="text-slate-600 dark:text-slate-300">{move || page_label()}</span>
+                    <span class="text-label">"/"</span>
+                    <span class="text-body">{move || page_label()}</span>
                 </div>
             </div>
             <div class="flex items-center gap-3">
                 <button 
                     on:click=toggle_theme 
-                    class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer border bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700"
+                    class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer border bg-muted border-border text-body hover:bg-border"
                 >
                     {move || if theme.get() == Theme::Dark {
                         view! { 

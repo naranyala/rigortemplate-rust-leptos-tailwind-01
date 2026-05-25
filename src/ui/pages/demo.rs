@@ -14,7 +14,6 @@ use crate::ui::components::{
 use crate::core::services::task_service::TaskService;
 use crate::core::store::GlobalStore;
 
-
 #[component]
 pub fn Demo() -> AnyView {
     let store = match use_context::<GlobalStore>() {
@@ -68,21 +67,21 @@ pub fn Demo() -> AnyView {
                 <div class="flex-1 space-y-8">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-3xl font-black tracking-tight dark:text-slate-100 text-slate-900">"Task Manager"</h1>
-                            <p class="dark:text-slate-400 text-slate-600">"Organize and track your development milestones."</p>
+                            <h1 class="text-3xl font-black tracking-tight text-heading">"Task Manager"</h1>
+                            <p class="text-body">"Organize and track your development milestones."</p>
                         </div>
-                        <div class="hidden sm:flex items-center gap-4 p-3 rounded-2xl shadow-sm border dark:bg-slate-800/80 dark:border-slate-700/50 bg-white border-slate-200">
+                        <div class="hidden sm:flex items-center gap-4 p-3 rounded-2xl shadow-sm border bg-raised border-border">
                             <div class="text-right">
-                                <p class="text-[10px] uppercase font-bold text-slate-500">"Progress"</p>
-                                <p class="text-xl font-black text-indigo-400">{move || format!("{:.0}%", progress())}</p>
+                                <p class="text-[10px] uppercase font-bold text-label">"Progress"</p>
+                                <p class="text-xl font-black text-accent">{move || format!("{:.0}%", progress())}</p>
                             </div>
-                            <div class="w-12 h-12 rounded-full border-4 border-t-indigo-400 animate-spin-slow flex items-center justify-center dark:border-slate-700 border-slate-300 relative">
-                                <div class="w-1 h-1 bg-indigo-400 rounded-full"></div>
+                            <div class="w-12 h-12 rounded-full border-4 border-t-accent animate-spin-slow flex items-center justify-center border-input relative">
+                                <div class="w-1 h-1 bg-accent rounded-full"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dark:bg-slate-800/80 bg-white dark:border-slate-700/50 border-slate-200 shadow-sm rounded-2xl p-6 border">
+                    <div class="bg-raised border-border shadow-sm rounded-2xl p-6 border">
                         <div class="flex gap-3 mb-8">
                             <div class="relative flex-1">
                                 <TheInput
@@ -108,22 +107,22 @@ pub fn Demo() -> AnyView {
                                     let id = task.id.clone();
                                     let id_remove = id.clone();
                                     view! {
-                                        <div class="flex items-center justify-between p-4 border border-transparent hover:border-indigo-500/30 rounded-2xl transition-all group dark:bg-slate-800/50 bg-slate-50">
+                                        <div class="flex items-center justify-between p-4 border border-transparent hover:border-accent/30 rounded-2xl transition-all group bg-muted">
                                             <div class="flex items-center gap-4">
                                                 <input
                                                     type="checkbox"
-                                                    class="w-4 h-4 rounded text-indigo-500 focus:ring-indigo-500 cursor-pointer border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-700"
+                                                    class="w-4 h-4 rounded text-accent focus:ring-accent cursor-pointer border-input bg-surface"
                                                     on:change=move |_| ts_change.toggle_task(id.clone())
                                                     prop:checked=task.completed
                                                 />
                                                 <span class=move || {
-                                                    if task.completed { "line-through text-slate-500" } else { "font-medium text-slate-800 dark:text-slate-200" }
+                                                    if task.completed { "line-through text-label" } else { "font-medium text-heading" }
                                                 }>
                                                     {task.text}
                                                 </span>
                                             </div>
                                             <Btn variant=ButtonVariant::Ghost on:click=move |_| ts_remove.remove_task(id_remove.clone())>
-                                                "✕"
+                                                "X"
                                             </Btn>
                                         </div>
                                     }
@@ -134,24 +133,23 @@ pub fn Demo() -> AnyView {
                 </div>
 
                 <div class="w-full lg:w-80 space-y-6">
-                    <div class="bg-indigo-500/10 text-white p-8 rounded-2xl border border-indigo-500/20 relative overflow-hidden">
+                    <div class="bg-accent/10 text-white p-8 rounded-2xl border border-accent/20 relative overflow-hidden">
                         <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-3 text-indigo-300">"Pro Tip"</h3>
-                            <p class="text-sm text-indigo-300/60 leading-relaxed">"Break large projects into smaller, atomic tasks to maintain momentum and visibility."</p>
+                            <h3 class="text-xl font-bold mb-3 text-accent-text">"Pro Tip"</h3>
+                            <p class="text-sm text-accent/60 leading-relaxed">"Break large projects into smaller, atomic tasks to maintain momentum and visibility."</p>
                         </div>
-                        <div class="absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12">"💡"</div>
                     </div>
                     <BaseCard title="Stats">
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center p-3 rounded-xl dark:bg-slate-800/50 bg-slate-100">
-                                <span class="text-sm dark:text-slate-400 text-slate-600">"Total"</span>
-                                <span class="font-black dark:text-slate-100 text-slate-900">{total_len}</span>
+                            <div class="flex justify-between items-center p-3 rounded-xl bg-muted">
+                                <span class="text-sm text-label">"Total"</span>
+                                <span class="font-black text-heading">{total_len}</span>
                             </div>
-                            <div class="flex justify-between items-center p-3 bg-emerald-900/20 text-emerald-400 rounded-xl">
+                            <div class="flex justify-between items-center p-3 bg-emerald-900/20 text-emerald-500 rounded-xl">
                                 <span class="text-sm font-medium">"Done"</span>
                                 <span class="font-black">{done_count}</span>
                             </div>
-                            <div class="flex justify-between items-center p-3 bg-amber-900/20 text-amber-400 rounded-xl">
+                            <div class="flex justify-between items-center p-3 bg-amber-900/20 text-amber-500 rounded-xl">
                                 <span class="text-sm font-medium">"Pending"</span>
                                 <span class="font-black">{pending_count}</span>
                             </div>
@@ -160,12 +158,12 @@ pub fn Demo() -> AnyView {
                 </div>
             </div>
 
-            <hr class="dark:border-slate-800 border-slate-200" />
+            <hr class="border-border" />
 
             <section class="space-y-8">
                 <div>
-                    <h2 class="text-2xl font-black tracking-tight dark:text-slate-100 text-slate-900">"Component Library"</h2>
-                    <p class="dark:text-slate-400 text-slate-600 mt-1">"Interactive showcase with live source code from each single-file component."</p>
+                    <h2 class="text-2xl font-black tracking-tight text-heading">"Component Library"</h2>
+                    <p class="text-body mt-1">"Interactive showcase with live source code from each single-file component."</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -186,34 +184,34 @@ pub fn Demo() -> AnyView {
 
                     <Showcase name="BaseCard">
                         <BaseCard title="Card Title">
-                            <p class="text-sm dark:text-slate-400 text-slate-600">"Card body content with any children."</p>
+                            <p class="text-sm text-body">"Card body content with any children."</p>
                         </BaseCard>
                         <BaseCard>
-                            <p class="text-sm dark:text-slate-400 text-slate-600">"Card without title."</p>
+                            <p class="text-sm text-body">"Card without title."</p>
                         </BaseCard>
                     </Showcase>
 
                     <Showcase name="BaseBadge">
-                        <BaseBadge text=String::from("v2.1.0") color=String::from("bg-indigo-500/20 text-indigo-300") />
-                        <BaseBadge text=String::from("Done") color=String::from("bg-emerald-500/20 text-emerald-300") />
-                        <BaseBadge text=String::from("Pending") color=String::from("bg-amber-500/20 text-amber-300") />
-                        <BaseBadge text=String::from("Error") color=String::from("bg-red-500/20 text-red-300") />
+                        <BaseBadge text=String::from("v2.1.0") color=String::from("bg-accent/20 text-accent-text") />
+                        <BaseBadge text=String::from("Done") color=String::from("bg-emerald-500/20 text-emerald-700") />
+                        <BaseBadge text=String::from("Pending") color=String::from("bg-amber-500/20 text-amber-700") />
+                        <BaseBadge text=String::from("Error") color=String::from("bg-red-500/20 text-red-700") />
                     </Showcase>
                 </div>
             </section>
 
             <section class="space-y-8">
                 <div>
-                    <h2 class="text-2xl font-black tracking-tight dark:text-slate-100 text-slate-900">"UI Pattern Demos"</h2>
-                    <p class="dark:text-slate-400 text-slate-600 mt-1">"Live interactive demos with full source code and syntax highlighting."</p>
+                    <h2 class="text-2xl font-black tracking-tight text-heading">"UI Pattern Demos"</h2>
+                    <p class="text-body mt-1">"Live interactive demos with full source code and syntax highlighting."</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-sm font-semibold uppercase tracking-wider dark:text-slate-300 text-slate-700">"Accordion"</h3>
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-body">"Accordion"</h3>
                         </div>
-                        <div class="p-5 rounded-xl border dark:bg-slate-800/50 dark:border-slate-700/50 bg-white border-slate-200">
+                        <div class="p-5 rounded-xl border bg-raised border-border">
                             <AccordionDemo />
                         </div>
                         <CodeBlock source=ACCORDION_SRC />
@@ -221,9 +219,9 @@ pub fn Demo() -> AnyView {
 
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-sm font-semibold uppercase tracking-wider dark:text-slate-300 text-slate-700">"Sliding Panel"</h3>
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-body">"Sliding Panel"</h3>
                         </div>
-                        <div class="p-5 rounded-xl border dark:bg-slate-800/50 dark:border-slate-700/50 bg-white border-slate-200">
+                        <div class="p-5 rounded-xl border bg-raised border-border">
                             <SlidingPanelDemo />
                         </div>
                         <CodeBlock source=PANEL_SRC />
@@ -233,15 +231,15 @@ pub fn Demo() -> AnyView {
 
             <section class="space-y-6">
                 <div>
-                    <h2 class="text-2xl font-black tracking-tight dark:text-slate-100 text-slate-900">"Showcase Source"</h2>
-                    <p class="dark:text-slate-400 text-slate-600 mt-1">"The CodeBlock and Showcase components used to build this library page."</p>
+                    <h2 class="text-2xl font-black tracking-tight text-heading">"Showcase Source"</h2>
+                    <p class="text-body mt-1">"The CodeBlock and Showcase components used to build this library page."</p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <Showcase name="CodeBlock">
-                        <p class="text-sm dark:text-slate-400 text-slate-600">"A dark-theme code viewer with window controls header and monospace rendering — used to display component source files inline."</p>
+                        <p class="text-sm text-body">"A dark-theme code viewer with window controls header and monospace rendering."</p>
                     </Showcase>
                     <Showcase name="Showcase">
-                        <p class="text-sm dark:text-slate-400 text-slate-600">"Wrapper that renders a component preview with a labeled header."</p>
+                        <p class="text-sm text-body">"Wrapper that renders a component preview with a labeled header."</p>
                     </Showcase>
                 </div>
             </section>

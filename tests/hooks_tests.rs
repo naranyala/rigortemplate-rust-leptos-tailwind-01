@@ -1,6 +1,6 @@
 use wasm_bindgen_test::*;
 use leptos::prelude::*;
-use leptos_template::stdlib::hooks::*;
+use leptos_template::shared::hooks::*;
 
 wasm_bindgen_test_configure!(run_in_browser);
 

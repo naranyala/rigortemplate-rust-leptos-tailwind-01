@@ -14,7 +14,7 @@ pub fn StatsCard(
     #[prop(into)] change: String,
     #[prop(into)] trend: Trend,
     #[prop(into)] icon: AnyView,
-    #[prop(into)] color: String, // Tailwind color class like "text-emerald-500"
+    #[prop(into)] color: String,
 ) -> impl IntoView {
     let trend_icon = match trend {
         Trend::Up => view! { 
@@ -35,21 +35,21 @@ pub fn StatsCard(
     };
 
     view! {
-        <div class="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+        <div class="p-6 bg-raised rounded-xl shadow-sm border border-border flex items-center justify-between">
             <div>
-                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">{title}</p>
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{value}</h3>
+                <p class="text-sm font-medium text-label mb-1">{title}</p>
+                <h3 class="text-2xl font-bold text-heading">{value}</h3>
                 <div class="flex items-center mt-2">
                     <span class=format!("flex items-center text-xs font-semibold {}", 
-                        if trend == Trend::Up { "text-emerald-500" } else if trend == Trend::Down { "text-rose-500" } else { "text-slate-500" }
+                        if trend == Trend::Up { "text-emerald-500" } else if trend == Trend::Down { "text-rose-500" } else { "text-label" }
                     )>
                         {trend_icon}
                         <span class="ml-1">{change}</span>
                     </span>
-                    <span class="ml-2 text-xs text-slate-400">{ "vs last month" }</span>
+                    <span class="ml-2 text-xs text-label">{ "vs last month" }</span>
                 </div>
             </div>
-            <div class=format!("p-3 rounded-lg bg-opacity-10 bg-slate-100 dark:bg-slate-700 {}", color)>
+            <div class=format!("p-3 rounded-lg bg-opacity-10 bg-muted {}", color)>
                 {icon}
             </div>
         </div>

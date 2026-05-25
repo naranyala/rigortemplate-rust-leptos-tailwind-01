@@ -57,21 +57,4 @@ pub fn StatsDemo() -> impl IntoView {
     }
 }
 
-pub const SOURCE: &str = r#"
-#[component]
-pub fn StatsDemo() -> impl IntoView {
-    view! {
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatsCard 
-                title="Total Revenue" 
-                value="$45,231.89" 
-                change="+20.1%" 
-                trend=Trend::Up 
-                color="text-emerald-500"
-                icon=view! { <Icon name="currency-dollar" /> } 
-            />
-            // ... other cards
-        </div>
-    }
-}
-"#;
+pub const SOURCE: &str = include_str!("stats.rs");

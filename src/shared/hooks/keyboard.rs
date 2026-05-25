@@ -1,5 +1,6 @@
 use web_sys::{window, KeyboardEvent};
 use wasm_bindgen::JsCast;
+use leptos::prelude::*;
 
 
 pub struct Shortcut {
@@ -29,9 +30,13 @@ where
     };
 
     let closure = wasm_bindgen::closure::Closure::wrap(Box::new(handle_keydown) as Box<dyn FnMut(_)>);
-    
-    win.add_event_listener_with_callback("keydown", closure.as_ref().unchecked_ref())
+    let callback_fn = closure.as_ref().unchecked_ref::<js_sys::Function>().clone();
+
+    win.add_event_listener_with_callback("keydown", &callback_fn)
         .expect("failed to add keydown listener");
 
+    on_cleanup(move || {
+        let _ = win.remove_event_listener_with_callback("keydown", &callback_fn);
+    });
     closure.forget();
 }

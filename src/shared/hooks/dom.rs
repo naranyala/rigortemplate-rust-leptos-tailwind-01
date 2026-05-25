@@ -8,14 +8,14 @@ where
     F: Fn() + 'static,
 {
     let win = window().expect("window not available");
-    
+
     let callback = std::rc::Rc::new(std::cell::RefCell::new(callback));
-    
+
     let handle_click = move |ev: MouseEvent| {
         let target_element = target.get().expect("target element not found");
         let path = ev.composed_path();
         let mut contains = false;
-        
+
             for node in path.iter() {
                 let node_as_node = node.unchecked_into::<Node>();
                 if AsRef::<Node>::as_ref(&node_as_node) == AsRef::<Node>::as_ref(&target_element) {
@@ -24,16 +24,20 @@ where
                 }
             }
 
-        
+
         if !contains {
             (callback.borrow_mut())();
         }
     };
 
     let closure = wasm_bindgen::closure::Closure::wrap(Box::new(handle_click) as Box<dyn FnMut(_)>);
-    
-    win.add_event_listener_with_callback("click", closure.as_ref().unchecked_ref())
+    let callback_fn = closure.as_ref().unchecked_ref::<js_sys::Function>().clone();
+
+    win.add_event_listener_with_callback("click", &callback_fn)
         .expect("failed to add click listener");
 
+    on_cleanup(move || {
+        let _ = win.remove_event_listener_with_callback("click", &callback_fn);
+    });
     closure.forget();
 }

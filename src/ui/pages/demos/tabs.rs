@@ -10,10 +10,10 @@ pub fn TabsDemo() -> impl IntoView {
             content: Box::new(|| view! { 
                 <div class="space-y-4">
                     <h4 class="text-lg font-semibold">Account Settings</h4>
-                    <p class="text-slate-500 dark:text-slate-400">Manage your account preferences and profile information.</p>
+                    <p class="text-label">Manage your account preferences and profile information.</p>
                     <div class="grid grid-cols-1 gap-4">
-                        <div class="p-4 border rounded-lg dark:border-slate-700">"Username: user_leptos"</div>
-                        <div class="p-4 border rounded-lg dark:border-slate-700">"Email: user@example.com"</div>
+                        <div class="p-4 border rounded-lg border-border">"Username: user_leptos"</div>
+                        <div class="p-4 border rounded-lg border-border">"Email: user@example.com"</div>
                     </div>
                 </div>
             }.into_any()),
@@ -24,8 +24,8 @@ pub fn TabsDemo() -> impl IntoView {
             content: Box::new(|| view! { 
                 <div class="space-y-4">
                     <h4 class="text-lg font-semibold">Security & Privacy</h4>
-                    <p class="text-slate-500 dark:text-slate-400">Update your password and enable two-factor authentication.</p>
-                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <p class="text-label">Update your password and enable two-factor authentication.</p>
+                    <button class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-hover transition-colors">
                         "Change Password"
                     </button>
                 </div>
@@ -37,7 +37,7 @@ pub fn TabsDemo() -> impl IntoView {
             content: Box::new(|| view! { 
                 <div class="space-y-4">
                     <h4 class="text-lg font-semibold">Notification Preferences</h4>
-                    <p class="text-slate-500 dark:text-slate-400">Control how you receive notifications from the system.</p>
+                    <p class="text-label">Control how you receive notifications from the system.</p>
                     <div class="flex items-center gap-2">
                         <input type="checkbox" checked />
                         <span>"Email Notifications"</span>
@@ -52,26 +52,10 @@ pub fn TabsDemo() -> impl IntoView {
     ];
 
     view! {
-        <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="max-w-2xl mx-auto bg-raised rounded-xl shadow-sm border border-border overflow-hidden">
             <Tabs items=items default_tab="account".to_string() />
         </div>
     }
 }
 
-pub const SOURCE: &str = r#"
-#[component]
-pub fn TabsDemo() -> impl IntoView {
-    let items = vec![
-        TabItem { 
-            id: "account".to_string(), 
-            label: "Account".to_string(), 
-            content: view! { <div>"Account Content"</div> }.into_any() 
-        },
-        // ... other tabs
-    ];
-
-    view! {
-        <Tabs items=items default_tab="account".to_string() />
-    }
-}
-"#;
+pub const SOURCE: &str = include_str!("tabs.rs");

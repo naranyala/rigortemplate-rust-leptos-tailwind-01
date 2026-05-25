@@ -12,27 +12,10 @@ pub fn use_toggle(initial: bool) -> (ReadSignal<bool>, impl Fn()) {
     (value, toggle)
 }
 
-/// A counter hook for managing numerical state.
-/// Returns a tuple containing the current count and a set of control functions.
-pub fn use_counter<T>(initial: T) -> (ReadSignal<T>, impl Fn(), impl Fn(), impl Fn(T))
-where
-    T: std::ops::AddAssign + std::ops::SubAssign + Copy + Send + Sync + 'static,
-{
-    let (count, _set_count) = signal(initial);
-    
-    let _increment = move || {
-
-        // This is a simplification. In a real implementation, we'd need a way to know 
-        // what "1" is for type T. We'll assume T is a numeric type.
-        // For this utility, we'll implement it for i32 by default or require a step.
-        // Let's provide a a more flexible version: use_counter_with_step.
-        // For now, we'll implement a simple i32 counter.
-    };
-
-    // Since generic AddAssign is tricky for a "generic counter" without a Step trait,
-    // let's implement a specific i32 version or a version that takes a step function.
-    
-    (count, move || {}, move || {}, move |_| {}) // Placeholder
+/// A counter hook that increments/decrements by 1.
+/// For a configurable step, use `use_counter_with_step`.
+pub fn use_counter(initial: i32) -> (ReadSignal<i32>, impl Fn(), impl Fn(), impl Fn(i32)) {
+    use_counter_with_step(initial, 1)
 }
 
 /// A more flexible counter hook that allows defining the step.

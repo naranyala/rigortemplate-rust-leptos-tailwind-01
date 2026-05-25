@@ -1,6 +1,6 @@
 use wasm_bindgen_test::*;
 use leptos::prelude::*;
-use leptos_template::services::task_service::TaskService;
+use leptos_template::core::services::task_service::TaskService;
 
 wasm_bindgen_test_configure!(run_in_browser);
 

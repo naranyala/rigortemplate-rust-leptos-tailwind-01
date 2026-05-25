@@ -10,7 +10,7 @@ pub struct MousePosition {
 
 pub fn use_mouse_position() -> ReadSignal<MousePosition> {
     let win = window().expect("window not available");
-    
+
     let initial_pos = MousePosition { x: 0, y: 0 };
     let (read_pos, write_pos) = signal(initial_pos);
 
@@ -22,10 +22,14 @@ pub fn use_mouse_position() -> ReadSignal<MousePosition> {
     };
 
     let closure = wasm_bindgen::closure::Closure::wrap(Box::new(handle_mousemove) as Box<dyn FnMut(_)>);
-    
-    win.add_event_listener_with_callback("mousemove", closure.as_ref().unchecked_ref())
+    let callback = closure.as_ref().unchecked_ref::<js_sys::Function>().clone();
+
+    win.add_event_listener_with_callback("mousemove", &callback)
         .expect("failed to add mousemove listener");
 
+    on_cleanup(move || {
+        let _ = win.remove_event_listener_with_callback("mousemove", &callback);
+    });
     closure.forget();
 
     read_pos

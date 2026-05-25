@@ -25,10 +25,10 @@ pub fn Btn(
 ) -> AnyView {
     let base = "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 cursor-pointer select-none disabled:opacity-50 disabled:pointer-events-none";
     let variant_class = match variant {
-        ButtonVariant::Primary => "bg-indigo-500 text-white hover:bg-indigo-600",
-        ButtonVariant::Secondary => "dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 bg-slate-200 text-slate-700 hover:bg-slate-300",
-        ButtonVariant::Outline => "border-2 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800 border-slate-300 text-slate-700 hover:bg-slate-100",
-        ButtonVariant::Ghost => "dark:text-slate-400 dark:hover:bg-slate-800 text-slate-600 hover:bg-slate-100",
+        ButtonVariant::Primary => "bg-accent text-white hover:bg-accent-hover",
+        ButtonVariant::Secondary => "bg-muted text-body hover:bg-border",
+        ButtonVariant::Outline => "border-2 border-input text-body hover:bg-muted",
+        ButtonVariant::Ghost => "text-label hover:bg-muted",
     };
 
     let cls = move || {

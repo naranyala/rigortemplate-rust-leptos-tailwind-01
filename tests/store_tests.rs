@@ -1,8 +1,8 @@
 use wasm_bindgen_test::*;
 use leptos::prelude::*;
-use leptos_template::store::{GlobalStore, Theme};
-use leptos_template::services::registry::{ServiceRegistry, Service};
-use leptos_template::services::task_service::TaskService;
+use leptos_template::core::store::{GlobalStore};
+use leptos_template::core::services::registry::{ServiceRegistry, Service};
+use leptos_template::core::services::task_service::TaskService;
 
 wasm_bindgen_test_configure!(run_in_browser);
 
@@ -56,7 +56,7 @@ fn test_global_store_theme_toggle() {
 fn test_global_store_notifications() {
     let store = GlobalStore::new();
     
-    store.notify("Test Message", leptos_template::store::NotificationLevel::Info);
+    store.notify("Test Message", leptos_template::core::store::NotificationLevel::Info);
     assert_eq!(store.notifications.get().len(), 1);
     assert_eq!(store.notifications.get()[0].message, "Test Message");
     

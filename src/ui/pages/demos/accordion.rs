@@ -15,17 +15,17 @@ pub fn AccordionDemo() -> AnyView {
         AccordionSection {
             title: "Getting Started",
             content: "Leptos is a full-stack, isomorphic Rust web framework leveraging fine-grained reactivity to build declarative user interfaces.",
-            icon: "🚀",
+            icon: "R",
         },
         AccordionSection {
             title: "Components",
             content: "Components are the building blocks of Leptos UIs. Each component is a Rust function that returns a view.",
-            icon: "🧩",
+            icon: "C",
         },
         AccordionSection {
             title: "Reactivity",
             content: "Signals are reactive values that automatically track dependencies and update the DOM when changed.",
-            icon: "⚡",
+            icon: "S",
         },
     ];
 
@@ -36,8 +36,8 @@ pub fn AccordionDemo() -> AnyView {
     };
 
     view! {
-        <div class="px-2.5 py-3 border-b dark:border-slate-800 border-slate-200">
-            <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider px-3 mb-2">"Accordion Demo"</p>
+        <div class="px-2.5 py-3 border-b border-border">
+            <p class="text-[10px] uppercase font-bold text-label tracking-wider px-3 mb-2">"Accordion Demo"</p>
             <div class="space-y-1">
                 {sections.into_iter().enumerate().map(|(idx, section)| {
                     let is_open = move || active.get() == Some(idx);
@@ -45,10 +45,10 @@ pub fn AccordionDemo() -> AnyView {
                     view! {
                         <div>
                             <button
-                                class="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-left cursor-pointer text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800"
+                                class="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-left cursor-pointer text-label hover:text-heading hover:bg-muted"
                                 on:click=move |_| toggle_idx(idx)
                             >
-                                <span class="text-base shrink-0">{section.icon}</span>
+                                <span class="text-base font-mono font-bold shrink-0 text-accent">{section.icon}</span>
                                 <span class="flex-1 truncate">{section.title}</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@ pub fn AccordionDemo() -> AnyView {
                             {move || {
                                 if is_open() {
                                     view! {
-                                        <div class="px-3 py-2 text-xs text-slate-500 leading-relaxed ml-1 border-l-2 border-indigo-500/30 mt-0.5 mb-1">
+                                        <div class="px-3 py-2 text-xs text-label leading-relaxed ml-1 border-l-2 border-accent/30 mt-0.5 mb-1">
                                             {section.content}
                                         </div>
                                     }.into_any()

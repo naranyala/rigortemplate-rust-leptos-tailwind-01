@@ -1,6 +1,70 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-muted: var(--muted);
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-label: var(--label);
+  --color-placeholder: var(--placeholder);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-ring: var(--accent-ring);
+  --color-accent-text: var(--accent-text);
+}
+
+:root {
+  --surface: #f8fafc;
+  --raised: #ffffff;
+  --muted: #f1f5f9;
+  --heading: #0f172a;
+  --body: #334155;
+  --label: #64748b;
+  --placeholder: #94a3b8;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-ring: #4f46e5;
+  --accent-text: #4338ca;
+}
+
+.dark {
+  --surface: #0f172a;
+  --raised: #1e293b;
+  --muted: #334155;
+  --heading: #f1f5f9;
+  --body: #cbd5e1;
+  --label: #94a3b8;
+  --placeholder: #64748b;
+  --border: #334155;
+  --input: #475569;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --accent-ring: #818cf8;
+  --accent-text: #818cf8;
+}
+
+.layout-sidebar, .layout-topnav {
+  --surface: #ffffff;
+  --raised: #ffffff;
+  --muted: #f1f5f9;
+  --heading: #0f172a;
+  --body: #334155;
+  --label: #64748b;
+  --placeholder: #94a3b8;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-ring: #4f46e5;
+  --accent-text: #4338ca;
+}
+
 @keyframes slide-up {
     from {
         transform: translateY(100%);
