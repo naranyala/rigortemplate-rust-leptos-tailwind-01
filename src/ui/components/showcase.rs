@@ -1,23 +1,25 @@
 use leptos::prelude::*;
-use super::code_block::CodeBlock;
-
-pub const SOURCE: &str = include_str!("showcase.rs");
 
 #[component]
 pub fn Showcase(
-    label: &'static str,
-    source: &'static str,
+    name: &'static str,
+    #[prop(optional)]
+    description: &'static str,
     children: Children,
 ) -> AnyView {
     view! {
-        <div class="space-y-3">
-            <div class="flex items-center justify-between">
-                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">{label}</h3>
+        <div class="dark:bg-slate-800/50 bg-white dark:border-slate-700/50 border-slate-200 rounded-2xl shadow-sm overflow-hidden border">
+            <div class="px-6 py-4 border-b dark:border-slate-700/50 border-slate-200">
+                <h3 class="font-bold dark:text-slate-200 text-slate-800">{name}</h3>
+                {move || if !description.is_empty() {
+                    view! { <p class="text-sm dark:text-slate-400 text-slate-600 mt-0.5">{description}</p> }.into_any()
+                } else {
+                    view! { <div></div> }.into_any()
+                }}
             </div>
-            <div class="p-5 bg-slate-800/50 border border-slate-700/50 rounded-xl flex items-center gap-3 flex-wrap">
+            <div class="p-6">
                 {children()}
             </div>
-            <CodeBlock source=source />
         </div>
     }.into_any()
 }

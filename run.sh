@@ -55,34 +55,11 @@ TOOLCHAIN=$(rustup default | head -1)
 echo -e "${GREEN}[OK]${NC} Rust toolchain: ${TOOLCHAIN}"
 
 # --- Port Detection ---
-port_in_use() {
-    local p=$1
-    if command -v lsof &>/dev/null; then
-        lsof -Pi :$p -sTCP:LISTEN -t &>/dev/null && return 0
-    elif command -v ss &>/dev/null; then
-        ss -tlnp "sport = :$p" 2>/dev/null | grep -q LISTEN && return 0
-    elif [ -f /proc/net/tcp ]; then
-        # /proc/net/tcp uses hex port numbers
-        local hex
-        hex=$(printf "%04X" "$p")
-        awk '{print $2}' /proc/net/tcp 2>/dev/null | grep -qi ":${hex}$" && return 0
-    else
-        # Last resort: try binding a socket (race-condition prone, but best effort)
-        (timeout 1 bash -c "exec 3>/dev/tcp/127.0.0.1/$p" 2>/dev/null) && return 0
-    fi
-    return 1
-}
-
-PORT=${PORT:-8080}
-MAX_PORT=$((PORT + 100))
-while port_in_use "$PORT"; do
-    echo -e "${YELLOW}[WARN]${NC} Port $PORT is in use, trying $((PORT + 1))..."
-    PORT=$((PORT + 1))
-    if [ "$PORT" -ge "$MAX_PORT" ]; then
-        echo -e "${RED}[ERROR]${NC} No free port found in range 8080-$((MAX_PORT - 1))"
-        exit 1
-    fi
-done
+PORT=$(./scripts/find-port.sh ${PORT:-8080})
+if [ $? -ne 0 ]; then
+    echo -e "${RED}[ERROR]${NC} Could not find an available port."
+    exit 1
+fi
 echo -e "${GREEN}[OK]${NC} Port $PORT is available"
 
 # --- Ensure output directories ---

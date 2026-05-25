@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use crate::ui::layout::{sidebar::Sidebar, topnav::TopNav};
 use crate::core::store::GlobalStore;
+use crate::core::utils::cn;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum LayoutType {
@@ -19,9 +20,10 @@ pub fn MainLayout(
     let theme = store.theme;
 
     view! {
-        <div class=move || format!("flex h-screen text-slate-100 transition-colors duration-300 {}", 
-            if theme.get() == crate::core::store::Theme::Dark { "bg-slate-900" } else { "bg-slate-100 text-slate-900" }
-        )>
+        <div class=move || cn(&[
+            Some("flex h-screen transition-colors duration-300"),
+            if theme.get() == crate::core::store::Theme::Dark { Some("dark bg-slate-900 text-slate-100") } else { Some("bg-slate-50 text-slate-900") },
+        ])>
             {move || match layout_type {
                 LayoutType::Default | LayoutType::NoTopNav => view! { <Sidebar /> }.into_any(),
                 _ => view! { <div /> }.into_any(),

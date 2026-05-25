@@ -9,13 +9,27 @@ pub enum Page {
     Accordion,
     SlidingPanel,
     Hooks,
-    // New pages for demos
+    // Hooks’ individual pages
+    HookToggle,
+    HookCounter,
+    HookWindowSize,
+    HookMousePosition,
+    HookMediaQuery,
+    HookOnlineStatus,
+    HookClickOutside,
+    HookKeyboardShortcut,
+    // Component demos
     Tabs,
     Stepper,
     Stats,
     Autocomplete,
     Upload,
     Modal,
+    Badge,
+    Button,
+    Card,
+    Input,
+    NotificationToast,
 }
 
 #[derive(Clone, Copy, PartialEq, Debug)]
@@ -56,7 +70,7 @@ impl GlobalStore {
         Self {
             current_page: RwSignal::new(Page::Home),
             sidebar_open: RwSignal::new(false),
-            theme: RwSignal::new(Theme::Dark),
+            theme: RwSignal::new(Theme::Light),
             notifications: RwSignal::new(Vec::new()),
             services,
         }

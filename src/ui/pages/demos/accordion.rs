@@ -36,7 +36,7 @@ pub fn AccordionDemo() -> AnyView {
     };
 
     view! {
-        <div class="px-2.5 py-3 border-b border-slate-800">
+        <div class="px-2.5 py-3 border-b dark:border-slate-800 border-slate-200">
             <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider px-3 mb-2">"Accordion Demo"</p>
             <div class="space-y-1">
                 {sections.into_iter().enumerate().map(|(idx, section)| {
@@ -45,7 +45,7 @@ pub fn AccordionDemo() -> AnyView {
                     view! {
                         <div>
                             <button
-                                class="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors text-left cursor-pointer"
+                                class="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors text-left cursor-pointer text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800"
                                 on:click=move |_| toggle_idx(idx)
                             >
                                 <span class="text-base shrink-0">{section.icon}</span>

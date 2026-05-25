@@ -10,10 +10,10 @@ pub fn BaseCard(
     children: Children,
 ) -> AnyView {
     view! {
-        <div class="bg-slate-800/80 border border-slate-700/50 rounded-2xl shadow-sm overflow-hidden">
+        <div class="dark:bg-slate-800/80 bg-white dark:border-slate-700/50 border-slate-200 rounded-2xl shadow-sm overflow-hidden border">
             {move || title.clone().map(|t| view! {
-                <div class="px-6 py-4 border-b border-slate-700/50">
-                    <h3 class="font-bold text-slate-200">{t}</h3>
+                <div class="px-6 py-4 border-b dark:border-slate-700/50 border-slate-200">
+                    <h3 class="font-bold dark:text-slate-200 text-slate-800">{t}</h3>
                 </div>
             })}
             <div class="p-6">

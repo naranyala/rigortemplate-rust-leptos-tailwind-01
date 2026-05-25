@@ -10,7 +10,7 @@ pub fn SlidingPanelDemo() -> AnyView {
     let close = move |_| open.set(false);
 
     view! {
-        <div class="px-2.5 py-3 border-b border-slate-800">
+        <div class="px-2.5 py-3 border-b dark:border-slate-800 border-slate-200">
             <p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider px-3 mb-2">"Sliding Panel Demo"</p>
             <div class="px-3">
                 <button
@@ -31,11 +31,11 @@ pub fn SlidingPanelDemo() -> AnyView {
                     <>
                         <div class="fixed inset-0 bg-black/50 z-40" on:click=close></div>
                         <div class="fixed bottom-0 left-0 right-0 z-50 animate-slide-up">
-                            <div class="bg-slate-800 border-t border-slate-700 rounded-t-2xl shadow-2xl mx-2 mb-2">
-                                <div class="flex items-center justify-between px-5 h-12 border-b border-slate-700">
-                                    <span class="text-sm font-semibold text-slate-200">"Sliding Panel"</span>
+                            <div class="rounded-t-2xl shadow-2xl mx-2 mb-2 border-t dark:bg-slate-800 dark:border-slate-700 bg-white border-slate-200">
+                                <div class="flex items-center justify-between px-5 h-12 border-b dark:border-slate-700 border-slate-200">
+                                    <span class="text-sm font-semibold dark:text-slate-200 text-slate-800">"Sliding Panel"</span>
                                     <button
-                                        class="flex items-center justify-center w-7 h-7 rounded-lg text-slate-500 hover:text-slate-100 hover:bg-slate-700 transition-colors cursor-pointer"
+                                        class="flex items-center justify-center w-7 h-7 rounded-lg transition-colors cursor-pointer text-slate-400 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-500 dark:hover:text-slate-100 dark:hover:bg-slate-700"
                                         on:click=close
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
@@ -43,7 +43,7 @@ pub fn SlidingPanelDemo() -> AnyView {
                                         </svg>
                                     </button>
                                 </div>
-                                <div class="p-5 space-y-3 text-sm text-slate-400">
+                                <div class="p-5 space-y-3 text-sm dark:text-slate-400 text-slate-600">
                                     <p>"This panel slides up from the bottom of the screen."</p>
                                     <p>"It can contain any content — forms, details, actions."</p>
                                     <p>"Click the backdrop or close button to dismiss."</p>
