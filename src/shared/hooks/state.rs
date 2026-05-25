@@ -1,5 +1,7 @@
 use leptos::prelude::*;
 
+pub const SOURCE: &str = include_str!("state.rs");
+
 /// A simple boolean toggle hook.
 /// Returns a tuple containing a read signal for the value and a function to toggle it.
 pub fn use_toggle(initial: bool) -> (ReadSignal<bool>, impl Fn()) {

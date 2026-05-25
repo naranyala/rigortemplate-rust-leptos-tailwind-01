@@ -2,6 +2,8 @@ use leptos::prelude::*;
 use web_sys::{window, MediaQueryListEvent};
 use wasm_bindgen::JsCast;
 
+pub const SOURCE: &str = include_str!("media.rs");
+
 pub fn use_media_query(query: &'static str) -> ReadSignal<bool> {
     let win = window().expect("window not available");
     let mql = win.match_media(query).expect("failed to match media query").expect("MediaQueryList not found");

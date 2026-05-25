@@ -1,23 +1,26 @@
 use leptos::prelude::*;
-use web_sys::{window, MouseEvent};
+use web_sys::MouseEvent;
 use wasm_bindgen::JsCast;
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+pub const SOURCE: &str = include_str!("mouse.rs");
+
+#[derive(Clone, Copy, Debug)]
 pub struct MousePosition {
-    pub x: i32,
-    pub y: i32,
+    pub x: u32,
+    pub y: u32,
 }
 
 pub fn use_mouse_position() -> ReadSignal<MousePosition> {
-    let win = window().expect("window not available");
+    let win = window();
 
     let initial_pos = MousePosition { x: 0, y: 0 };
+
     let (read_pos, write_pos) = signal(initial_pos);
 
     let handle_mousemove = move |ev: MouseEvent| {
         write_pos.set(MousePosition {
-            x: ev.client_x(),
-            y: ev.client_y(),
+            x: ev.client_x() as u32,
+            y: ev.client_y() as u32,
         });
     };
 
@@ -34,3 +37,4 @@ pub fn use_mouse_position() -> ReadSignal<MousePosition> {
 
     read_pos
 }
+

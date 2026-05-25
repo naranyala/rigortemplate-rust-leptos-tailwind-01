@@ -2,8 +2,10 @@ use web_sys::{window, KeyboardEvent};
 use wasm_bindgen::JsCast;
 use leptos::prelude::*;
 
+pub const SOURCE: &str = include_str!("keyboard.rs");
 
 pub struct Shortcut {
+
     pub key: String,
     pub ctrl: bool,
     pub alt: bool,

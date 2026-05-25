@@ -234,14 +234,15 @@ pub fn Demo() -> AnyView {
                     <h2 class="text-2xl font-black tracking-tight text-heading">"Showcase Source"</h2>
                     <p class="text-body mt-1">"The CodeBlock and Showcase components used to build this library page."</p>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <Showcase name="CodeBlock">
-                        <p class="text-sm text-body">"A dark-theme code viewer with window controls header and monospace rendering."</p>
-                    </Showcase>
-                    <Showcase name="Showcase">
-                        <p class="text-sm text-body">"Wrapper that renders a component preview with a labeled header."</p>
-                    </Showcase>
-                </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <Showcase name="CodeBlock">
+                            <CodeBlock source=crate::ui::components::code_block::SOURCE />
+                        </Showcase>
+                        <Showcase name="Showcase">
+                            <CodeBlock source=crate::ui::components::showcase::SOURCE />
+                        </Showcase>
+                    </div>
+
             </section>
         </div>
     }.into_any()

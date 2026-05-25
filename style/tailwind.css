@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 @plugin "@tailwindcss/typography";
 
 @theme {
@@ -49,21 +50,6 @@
   --accent-text: #818cf8;
 }
 
-.layout-sidebar, .layout-topnav {
-  --surface: #ffffff;
-  --raised: #ffffff;
-  --muted: #f1f5f9;
-  --heading: #0f172a;
-  --body: #334155;
-  --label: #64748b;
-  --placeholder: #94a3b8;
-  --border: #e2e8f0;
-  --input: #cbd5e1;
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
-  --accent-ring: #4f46e5;
-  --accent-text: #4338ca;
-}
 
 @keyframes slide-up {
     from {
@@ -78,12 +64,12 @@
     animation: slide-up 0.3s ease-out;
 }
 
-.hl-keyword  { color: #ff79c6; }
-.hl-type     { color: #8be9fd; }
-.hl-string   { color: #f1fa8c; }
-.hl-comment  { color: #6272a4; font-style: italic; }
-.hl-number   { color: #bd93f9; }
-.hl-macro    { color: #50fa7b; }
-.hl-attribute { color: #ffb86c; }
-.hl-lifetime { color: #ff5555; }
-.hl-ctor     { color: #8be9fd; }
+.hl-keyword   { color: #c678dd; }
+.hl-type      { color: #61afef; }
+.hl-string    { color: #98c379; }
+.hl-comment   { color: #5c6370; font-style: italic; }
+.hl-number    { color: #d19a66; }
+.hl-macro     { color: #c678dd; }
+.hl-attribute { color: #e5c07b; }
+.hl-lifetime  { color: #e06c75; }
+.hl-ctor      { color: #61afef; }

@@ -1,5 +1,7 @@
 use leptos::prelude::*;
 
+pub const SOURCE: &str = include_str!("showcase.rs");
+
 #[component]
 pub fn Showcase(
     name: &'static str,

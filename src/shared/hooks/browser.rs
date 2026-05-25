@@ -2,6 +2,8 @@ use leptos::prelude::*;
 use web_sys::window;
 use wasm_bindgen::JsCast;
 
+pub const SOURCE: &str = include_str!("browser.rs");
+
 /// Tracks if the browser is online or offline.
 pub fn use_online_status() -> ReadSignal<bool> {
     let win = window().expect("window not available");

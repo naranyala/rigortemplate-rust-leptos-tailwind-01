@@ -1,6 +1,8 @@
 use leptos::prelude::*;
 use crate::core::store::{use_store, NotificationLevel};
 
+pub const SOURCE: &str = include_str!("notification_toast.rs");
+
 #[component]
 pub fn NotificationToast() -> impl IntoView {
     let store = use_store();

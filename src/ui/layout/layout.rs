@@ -18,9 +18,28 @@ pub fn MainLayout(
     let store = use_context::<GlobalStore>().expect("GlobalStore not provided");
     let theme = store.theme;
 
+    Effect::new(move |_| {
+        let is_dark = Theme::Dark == theme.get();
+        if let Some(document) = window().document() {
+            if let Some(html) = document.document_element() {
+                let mut classes = html.get_attribute("class").unwrap_or_default();
+                if is_dark {
+                    if !classes.contains("dark") {
+                        classes.push_str(" dark");
+                        let _ = html.set_attribute("class", &classes);
+                    }
+                } else {
+                    if classes.contains("dark") {
+                        let new_classes = classes.replace(" dark", "").replace("dark ", "").replace("dark", "");
+                        let _ = html.set_attribute("class", &new_classes);
+                    }
+                }
+            }
+        }
+    });
+
     view! {
-        <div class="flex h-screen transition-colors duration-300 bg-surface text-body"
-             class:dark=move || Theme::Dark == theme.get()>
+        <div class="flex h-screen transition-colors duration-300 bg-surface text-body">
             {move || match layout_type {
                 LayoutType::Default | LayoutType::NoTopNav => view! { <Sidebar /> }.into_any(),
                 _ => view! { <div /> }.into_any(),

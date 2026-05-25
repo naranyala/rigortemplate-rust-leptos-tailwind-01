@@ -38,7 +38,6 @@
     --color-rose-500: oklch(64.5% 0.246 16.439);
     --color-rose-600: oklch(58.6% 0.253 17.585);
     --color-slate-200: oklch(92.9% 0.013 255.508);
-    --color-slate-300: oklch(86.9% 0.022 252.894);
     --color-slate-500: oklch(55.4% 0.046 257.417);
     --color-slate-700: oklch(37.2% 0.044 257.287);
     --color-slate-800: oklch(27.9% 0.041 260.031);
@@ -397,8 +396,8 @@
   .h-1 {
     height: calc(var(--spacing) * 1);
   }
-  .h-3 {
-    height: calc(var(--spacing) * 3);
+  .h-2\.5 {
+    height: calc(var(--spacing) * 2.5);
   }
   .h-4 {
     height: calc(var(--spacing) * 4);
@@ -436,8 +435,8 @@
   .w-1 {
     width: calc(var(--spacing) * 1);
   }
-  .w-3 {
-    width: calc(var(--spacing) * 3);
+  .w-2\.5 {
+    width: calc(var(--spacing) * 2.5);
   }
   .w-4 {
     width: calc(var(--spacing) * 4);
@@ -676,14 +675,20 @@
   .border-slate-200 {
     border-color: var(--color-slate-200);
   }
-  .border-slate-800 {
-    border-color: var(--color-slate-800);
+  .border-slate-700\/50 {
+    border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-slate-700) 50%, transparent);
+    }
   }
   .border-transparent {
     border-color: transparent;
   }
   .border-t-accent {
     border-top-color: var(--color-accent);
+  }
+  .bg-\[\#0d1117\] {
+    background-color: #0d1117;
   }
   .bg-accent {
     background-color: var(--color-accent);
@@ -784,14 +789,11 @@
   .bg-rose-600 {
     background-color: var(--color-rose-600);
   }
-  .bg-slate-800\/40 {
-    background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 40%, transparent);
+  .bg-slate-800\/50 {
+    background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-slate-800) 40%, transparent);
+      background-color: color-mix(in oklab, var(--color-slate-800) 50%, transparent);
     }
-  }
-  .bg-slate-900 {
-    background-color: var(--color-slate-900);
   }
   .bg-stone-900\/60 {
     background-color: color-mix(in srgb, oklch(21.6% 0.006 56.043) 60%, transparent);
@@ -959,8 +961,11 @@
     --tw-tracking: var(--tracking-widest);
     letter-spacing: var(--tracking-widest);
   }
-  .whitespace-pre {
-    white-space: pre;
+  .break-all {
+    word-break: break-all;
+  }
+  .whitespace-pre-wrap {
+    white-space: pre-wrap;
   }
   .text-accent {
     color: var(--color-accent);
@@ -1030,9 +1035,6 @@
   }
   .text-rose-500 {
     color: var(--color-rose-500);
-  }
-  .text-slate-300 {
-    color: var(--color-slate-300);
   }
   .text-slate-500 {
     color: var(--color-slate-500);
@@ -1371,32 +1373,32 @@
   }
 }
 .hl-keyword {
-  color: #c678dd;
+  color: #ff79c6;
 }
 .hl-type {
-  color: #61afef;
+  color: #8be9fd;
 }
 .hl-string {
-  color: #98c379;
+  color: #f1fa8c;
 }
 .hl-comment {
-  color: #5c6370;
+  color: #6272a4;
   font-style: italic;
 }
 .hl-number {
-  color: #d19a66;
+  color: #bd93f9;
 }
 .hl-macro {
-  color: #c678dd;
+  color: #50fa7b;
 }
 .hl-attribute {
-  color: #e5c07b;
+  color: #ffb86c;
 }
 .hl-lifetime {
-  color: #e06c75;
+  color: #ff5555;
 }
 .hl-ctor {
-  color: #61afef;
+  color: #8be9fd;
 }
 @property --tw-translate-x {
   syntax: "*";
