@@ -70,7 +70,7 @@ impl GlobalStore {
         Self {
             current_page: RwSignal::new(Page::Home),
             sidebar_open: RwSignal::new(false),
-            theme: RwSignal::new(Theme::Light),
+            theme: RwSignal::new(Theme::Dark),
             notifications: RwSignal::new(Vec::new()),
             services,
         }

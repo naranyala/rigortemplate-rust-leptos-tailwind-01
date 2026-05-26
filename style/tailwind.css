@@ -64,12 +64,12 @@
     animation: slide-up 0.3s ease-out;
 }
 
-.hl-keyword   { color: #c678dd; }
-.hl-type      { color: #61afef; }
-.hl-string    { color: #98c379; }
-.hl-comment   { color: #5c6370; font-style: italic; }
-.hl-number    { color: #d19a66; }
-.hl-macro     { color: #c678dd; }
-.hl-attribute { color: #e5c07b; }
-.hl-lifetime  { color: #e06c75; }
-.hl-ctor      { color: #61afef; }
+.hl-keyword   { color: #ff6b6b; }
+.hl-type      { color: #4ecdc4; }
+.hl-string    { color: #45b7d1; }
+.hl-comment   { color: #96c93d; font-style: italic; }
+.hl-number    { color: #f9ca24; }
+.hl-macro     { color: #f0932b; }
+.hl-attribute { color: #eb4d4b; }
+.hl-lifetime  { color: #6c5ce7; }
+.hl-ctor      { color: #a29bfe; }

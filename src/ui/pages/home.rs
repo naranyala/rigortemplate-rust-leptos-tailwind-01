@@ -1,5 +1,4 @@
 use leptos::prelude::*;
-use crate::core::store::GlobalStore;
 use crate::core::nav::{COMPONENTS_ITEMS, HOOKS_ITEMS};
 
 #[component]

@@ -25,11 +25,11 @@ pub fn CodeBlock(source: &'static str) -> AnyView {
                 <span class="text-[11px] text-slate-500 font-mono font-medium">"source.rs"</span>
             </div>
             <div class="overflow-x-auto">
-                <pre class="p-5 text-[13px] leading-relaxed font-mono text-slate-300 whitespace-pre">
+                <pre class="p-6 text-[13px] leading-[1.7] font-mono text-slate-200 whitespace-pre">
                     {if is_empty {
                         view! { <span class="text-red-400 italic">"⚠️ Source code is missing or empty!"</span> }.into_any()
                     } else {
-                        view! { <code inner_html=html></code> }.into_any()
+                        view! { <code inner_html=html class="block"></code> }.into_any()
                     }}
                 </pre>
             </div>

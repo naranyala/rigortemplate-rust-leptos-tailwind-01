@@ -29,7 +29,7 @@ fn nav_section(
     }
 
     view! {
-        <div>
+        <div class="mb-4">
             <p class="px-3 mb-2 text-[10px] uppercase font-bold tracking-widest text-label">{title}</p>
             <div class="space-y-1">
                 {filtered.into_iter().map(|item| {
@@ -62,7 +62,7 @@ fn nav(
     open_store: RwSignal<bool>,
     search_query: RwSignal<String>,
 ) -> AnyView {
-    let nav = move || {
+    let _nav = move || {
         let q = search_query.get();
         view! {
             <>
@@ -74,27 +74,35 @@ fn nav(
 
     view! {
         <div class="layout-sidebar flex flex-col h-full w-64 bg-surface shadow-lg shadow-black/[0.04]">
-            <div class="flex items-center gap-2.5 px-4 h-14 border-b border-border shrink-0 bg-surface">
-                <div class="w-7 h-7 bg-accent rounded-lg flex items-center justify-center text-white font-black text-sm shadow-sm shadow-accent/30 shrink-0">"L"</div>
-                <span class="text-sm font-semibold tracking-tight text-heading">"Leptos"</span>
-            </div>
-
-            <div class="px-2.5 pt-3 pb-1">
+            <div class="px-2.5 pt-3 pb-1 relative">
                 <input
                     type="text"
                     placeholder="Search..."
                     prop:value=search_query
                     on:input=move |ev| search_query.set(event_target_value(&ev))
-                    class="w-full px-2 py-1.5 text-xs rounded-lg border transition-colors outline-none focus:ring-2 focus:ring-accent-ring/40 bg-muted border-border text-body placeholder-placeholder"
+                    class="w-full px-2 py-1.5 text-xs rounded-lg border transition-colors outline-none focus:ring-2 focus:ring-accent-ring/40 bg-muted border-border text-body placeholder-placeholder pl-8 pr-10"
                 />
+                {move || if !search_query.get().is_empty() {
+                    view! {
+                        <button
+                            on:click=move |_| search_query.set(String::new())
+                            class="absolute right-2 top-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full hover:bg-muted transition-colors text-xs text-label hover:text-heading"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    }.into_any()
+                } else {
+                    view! { <div></div> }.into_any()
+                }}
             </div>
 
-            <nav class="flex-1 px-2.5 py-2 space-y-6 overflow-y-auto">
+            <nav class="flex-1 px-2.5 py-2 overflow-y-auto">
                 {move || {
                     let q = search_query.get();
                     view! {
                         <>
                             {nav_section("Components", COMPONENTS_ITEMS, current_page, open_store, &q)}
+                            <div class="my-6 border-t border-border"/>
                             {nav_section("Hooks", HOOKS_ITEMS, current_page, open_store, &q)}
                         </>
                     }.into_any()
